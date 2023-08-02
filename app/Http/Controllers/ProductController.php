@@ -17,7 +17,6 @@ class ProductController extends Controller
     {
         return view('product.index', [
             'products' => Product::all(),
-            'test' => 123,
         ]);
     }
 
@@ -39,27 +38,23 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreProductRequest $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(Product $product)
     {
-        //
+        return view('product.create', [
+            'product' => $product,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(Product $product, string $id)
     {
-        return view('product.edit', [
+        $product = Product::find($id);
+
+        return view('product.update', [
             'product' => $product,
         ]);
     }
@@ -67,8 +62,18 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(Request $request): RedirectResponse
     {
-        //
+        $product = Product::find($request->id);
+ 
+        $product->id = $request->id;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->qty = $request->qty;
+ 
+        $return = $product->save();
+ 
+        return redirect('/product' . '/' . $product->id)->with('status', 'product-updated');
     }
 }
