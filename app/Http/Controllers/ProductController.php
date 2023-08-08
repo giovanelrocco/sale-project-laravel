@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,14 +24,14 @@ class ProductController extends Controller
     public function create(Request $request): RedirectResponse
     {
         $product = new Product;
- 
+
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
         $product->qty = $request->qty;
- 
+
         $product->save();
- 
+
         return redirect('/products');
     }
 
@@ -65,15 +63,15 @@ class ProductController extends Controller
     public function update(Request $request): RedirectResponse
     {
         $product = Product::find($request->id);
- 
+
         $product->id = $request->id;
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
         $product->qty = $request->qty;
- 
+
         $return = $product->save();
- 
+
         return redirect('/product' . '/' . $product->id)->with('status', 'product-updated');
     }
 }
