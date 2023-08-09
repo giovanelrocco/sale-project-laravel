@@ -5,10 +5,19 @@ on: [push]
 jobs:
  build-test:
    runs-on: ubuntu-latest
+   env:
+    DB_DATABASE: sale-project
+    DB_USER: ${{ secrets.DB_USER }}
+    DB_PASSWORD: ${{ secrets.DB_PASS }}
 
    steps:
      - name: Checkout Code
        uses: actions/checkout@v2
+    
+     - name: Set up MySQL
+       run: |
+        sudo /etc/init.d/mysql start
+        mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
 
      - name: Install composer and dependencies
        uses: php-actions/composer@v6
