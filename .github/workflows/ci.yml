@@ -24,7 +24,7 @@ jobs:
 
      - name: Run Migration
        run: |
-        php artisan migrate --force
+        php artisan migrate --env=test --force
 
      - name: PHPUnit Tests
        uses: php-actions/phpunit@v3
