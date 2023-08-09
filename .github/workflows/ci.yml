@@ -6,7 +6,7 @@ jobs:
  build-test:
    runs-on: ubuntu-latest
    env:
-    DB_DATABASE: "sale_project"
+    DB_DATABASE: sale_project
     DB_USER: ${{ secrets.DB_USER }}
     DB_PASSWORD: ${{ secrets.DB_PASS }}
 
