@@ -1,4 +1,4 @@
-name: CI
+name: CI Sale Project
 
 on: [push]
 
@@ -21,6 +21,10 @@ jobs:
 
      - name: Install composer and dependencies
        uses: php-actions/composer@v6
+
+     - name: Run Migration
+       run: |
+        php artisan migrate --force
 
      - name: PHPUnit Tests
        uses: php-actions/phpunit@v3
