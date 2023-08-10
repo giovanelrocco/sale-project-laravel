@@ -30,6 +30,8 @@ jobs:
       - name: Generate key
         run: php artisan key:generate
       - name: Run Migration
+        env:
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}
         run: |
          php artisan migrate
       - name: Execute tests (Unit and Feature tests) using PHPUnit
