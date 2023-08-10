@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCustomerRequest;
-use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Customer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,11 +24,11 @@ class CustomerController extends Controller
     public function create(Request $request): RedirectResponse
     {
         $customer = new Customer;
- 
+
         $customer->name = $request->name;
- 
+
         $customer->save();
- 
+
         return redirect('/customers');
     }
 
@@ -62,12 +60,12 @@ class CustomerController extends Controller
     public function update(Request $request): RedirectResponse
     {
         $customer = Customer::find($request->id);
- 
+
         $customer->id = $request->id;
         $customer->name = $request->name;
- 
+
         $return = $customer->save();
- 
+
         return redirect('/customer' . '/' . $customer->id)->with('status', 'customer-updated');
     }
 }
