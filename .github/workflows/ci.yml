@@ -31,7 +31,7 @@ jobs:
         run: php artisan key:generate
       - name: Set up MySQL
         run: |
-         mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+         mysql -e 'CREATE DATABASE sale_project;' -u root -p root
       - name: Run Migration
         env:
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
