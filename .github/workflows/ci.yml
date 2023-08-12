@@ -6,7 +6,7 @@ jobs:
     name: Laravel (PHP ${{ matrix.php-versions }})
     runs-on: ubuntu-latest
     env:
-      DB_DATABASE: ${{ secrets.DB_NAME }}
+      DB_DATABASE: sale_project
       DB_USER: ${{ secrets.DB_USER }}
       DB_PASSWORD: ${{ secrets.DB_PASS }}
 
