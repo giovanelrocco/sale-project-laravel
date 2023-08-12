@@ -67,6 +67,10 @@ jobs:
       - name: Clear Config
         run: php artisan config:clear
 
+      - name: Show Databases
+       run: |
+        sudo /etc/init.d/mysql start
+        mysql -e 'SHOW DATABASES;' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
       - name: Run Migration
         run: php artisan migrate -v
         env:
