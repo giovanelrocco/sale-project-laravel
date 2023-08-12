@@ -13,7 +13,7 @@ jobs:
       - name: Set up MySQL
         run: |
           sudo /etc/init.d/mysql start
-          mysql -e 'CREATE DATABASE sale_project;' -u root -p root
+          mysql -e 'CREATE DATABASE sale_project;' -uroot -proot
       - uses: actions/checkout@v1
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
