@@ -29,7 +29,7 @@ jobs:
         run: npm install
       - name: Generate key
         run: php artisan key:generate
-      - name: Run Migration
+      - name: Run Migration on env.DB_DATABASE env.DB_USER
         env:
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
         run: |
