@@ -15,7 +15,7 @@ jobs:
         env:
           MYSQL_DATABASE: env.DB_DATABASE
           MYSQL_ALLOW_EMPTY_PASSWORD: false
-          MYSQL_ROOT_PASSWORD: env.db_user
+          MYSQL_ROOT_PASSWORD: env.DB_PASS
         ports:
           - 3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
