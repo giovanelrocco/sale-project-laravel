@@ -6,16 +6,16 @@ jobs:
   app-tests:
     runs-on: ubuntu-latest
     env:
-      DB_DATABASE: sale_project
+      DB_DATABASE: ${{ secrets.DB_NAME }}
       DB_USER: ${{ secrets.DB_USER }}
       DB_PASSWORD: ${{ secrets.DB_PASS }}
     services:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_DATABASE: sale_project
+          MYSQL_DATABASE: env.DB_DATABASE
           MYSQL_ALLOW_EMPTY_PASSWORD: false
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: env.db_user
         ports:
           - 3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
