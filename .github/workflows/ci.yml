@@ -13,9 +13,9 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_DATABASE: env.DB_DATABASE
+          MYSQL_DATABASE: ${{ env.DB_DATABASE }}
           MYSQL_ALLOW_EMPTY_PASSWORD: false
-          MYSQL_ROOT_PASSWORD: env.DB_PASS
+          MYSQL_ROOT_PASSWORD: ${{ env.DB_PASS }}
         ports:
           - 3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -29,7 +29,7 @@ jobs:
         run: npm install
       - name: Generate key
         run: php artisan key:generate
-      - name: Run Migration on env.DB_DATABASE env.DB_USER
+      - name: Run Migration on ${{ env.DB_DATABASE }} ${{ env.DB_USER }}
         env:
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
         run: |
