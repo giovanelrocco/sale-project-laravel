@@ -5,17 +5,17 @@ jobs:
     name: Laravel (PHP ${{ matrix.php-versions }})
     runs-on: ubuntu-latest
     env:
-      DB_DATABASE: ${{ secrets.DB_NAME }}
+      DB_DATABASE: ${{ secrets.DB_DATABASE }}
       DB_USER: ${{ secrets.DB_USER }}
-      DB_PASSWORD: ${{ secrets.DB_PASS }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
 
     # Docs: https://docs.github.com/en/actions/using-containerized-services
     services:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASS }}
-          MYSQL_DATABASE: ${{ secrets.DB_NAME }}
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.DB_DATABASE }}
         ports:
           - 3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -70,7 +70,12 @@ jobs:
         run: php artisan migrate -v
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-
+      
+      - name: Create Test Database
+        run: php artisan db:dbtestcreate
+        env:
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+      
       - name: Run Tests
         run: php artisan test
         env:

@@ -2,10 +2,15 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class Customer extends TestCase
 {
+
+    use RefreshDatabase;
+
     public function test_customers_page_is_displayed(): void
     {
         $user = User::factory()->create();
@@ -46,7 +51,7 @@ class Customer extends TestCase
     public function test_customer_page_is_displayed_with_information(): void
     {
         $user = User::factory()->create();
-        $customer = customer::firstWhere('name', 'Test customer');
+        $customer = Customer::firstWhere('name', 'Test customer');
 
         $response = $this
             ->actingAs($user)
@@ -58,7 +63,7 @@ class Customer extends TestCase
     public function test_update_customer(): void
     {
         $user = User::factory()->create();
-        $customer = customer::firstWhere('name', 'Test customer');
+        $customer = Customer::firstWhere('name', 'Test customer');
 
         $new_customer_info = [
             'name' => 'Test customer chaged',
