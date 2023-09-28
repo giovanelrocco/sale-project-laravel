@@ -12,7 +12,7 @@ class dbtestcreate extends Command
      *
      * @var string
      */
-    protected $signature = 'app:dbtestcreate';
+    protected $signature = 'db:dbtestcreate';
 
     /**
      * The console command description.
