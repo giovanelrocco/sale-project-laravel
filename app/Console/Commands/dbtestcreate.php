@@ -30,7 +30,7 @@ class dbtestcreate extends Command
     public function handle()
     {
         try {
-            $db_name = "objectiveChallengeTest";
+            $db_name = "sale_project_test";
 
             $hasDb = DB::select("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = " . "'" . $db_name . "'");
 
